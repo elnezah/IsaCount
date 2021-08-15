@@ -1,5 +1,7 @@
 {
   "name": "IsaCount",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

@@ -20,12 +20,23 @@
     "@angular/platform-browser": "~12.1.1",
     "@angular/platform-browser-dynamic": "~12.1.1",
     "@angular/router": "~12.1.1",
+    "@capacitor/app": "1.0.2",
+    "@capacitor/camera": "^1.0.3",
+    "@capacitor/core": "^3.1.2",
+    "@capacitor/haptics": "1.0.2",
+    "@capacitor/keyboard": "1.0.2",
+    "@capacitor/status-bar": "1.0.2",
+    "@ionic-native/core": "^5.1.0",
+    "@ionic-native/sqlite": "^5.35.0",
     "@ionic/angular": "^5.5.2",
+    "cordova-sqlite-storage": "^6.0.0",
+    "dayjs": "^1.10.6",
     "rxjs": "~6.6.0",
     "tslib": "^2.2.0",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
+    "@angular-devkit/architect": "^0.1200.0",
     "@angular-devkit/build-angular": "~12.1.1",
     "@angular-eslint/builder": "~12.0.0",
     "@angular-eslint/eslint-plugin": "~12.0.0",
@@ -35,6 +46,7 @@
     "@angular/compiler": "~12.1.1",
     "@angular/compiler-cli": "~12.1.1",
     "@angular/language-service": "~12.0.1",
+    "@capacitor/cli": "^3.1.2",
     "@ionic/angular-toolkit": "^4.0.0",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
@@ -55,7 +67,8 @@
     "karma-jasmine-html-reporter": "^1.5.0",
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
-    "typescript": "~4.2.4"
+    "typescript": "~4.2.4",
+    "ajv": "^6.9.1"
   },
   "description": "An Ionic project"
 }
