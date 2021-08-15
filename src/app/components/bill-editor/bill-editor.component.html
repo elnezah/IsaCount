@@ -1,0 +1,18 @@
+<div class="bill-editor-modal-container">
+  <ion-list class="bill-editor-modal-fields">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input [(ngModel)]="bill.name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea [(ngModel)]="bill.description"></ion-textarea>
+    </ion-item>
+  </ion-list>
+
+  <div class="bill-editor-modal-buttons">
+    <ion-button (click)="onClickOnCancel()">Cancel</ion-button>
+    <ion-button (click)="onClickOnSave()">Save</ion-button>
+  </div>
+</div>
