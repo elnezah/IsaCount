@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS "bill" (
 	"geoLocation"	TEXT,
 	"dateTime"	TEXT,
 	PRIMARY KEY("id" AUTOINCREMENT)
-)
+);
 
 CREATE TABLE IF NOT EXISTS "counter" (
 	"id"	INTEGER,

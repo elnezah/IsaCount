@@ -11,8 +11,9 @@ import { BehaviorSubject } from 'rxjs';
 export class DatabaseService {
   private static readonly TAG = 'DatabaseService';
 
+  public dbReady = new BehaviorSubject(false);
+
   private db: SQLiteObject;
-  private dbReady: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   public constructor(private http: HttpClient,
                      private platform: Platform,
@@ -126,7 +127,12 @@ export class DatabaseService {
 
   private async initDatabase(): Promise<void> {
     const sqlScript = await this.http.get('assets/init.sql', {responseType: 'text'}).toPromise();
-    await this.db.executeSql(sqlScript);
+    const queries = sqlScript.split(';').map(q => q.trim());
+    for(const query of queries) {
+      console.log(DatabaseService.TAG, 'initDatabase before', {query});
+      await this.db.executeSql(query, []);
+      console.log(DatabaseService.TAG, 'initDatabase executeSql', query);
+    }
     this.dbReady.next(true);
   }
 }

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">IsaCount</string>
+    <string name="title_activity_main">IsaCount</string>
+    <string name="package_name">eu.elnezah.isacount</string>
+    <string name="custom_url_scheme">eu.elnezah.isacount</string>
+</resources>

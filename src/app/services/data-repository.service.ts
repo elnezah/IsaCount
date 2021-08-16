@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Dayjs } from 'dayjs';
 import * as dayjs from 'dayjs';
 import { DatabaseService } from './database.service';
+import { BehaviorSubject } from 'rxjs';
 
 // region Interfaces for data model
 export interface Bill {
@@ -134,6 +135,10 @@ export class DataRepositoryService {
   }
 
   // endregion
+
+  public getDbState(): BehaviorSubject<boolean> {
+    return this.db.dbReady;
+  }
 
   // region Bill
   public async getAllBills(): Promise<Bill[]> {

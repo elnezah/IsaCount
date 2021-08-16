@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Bill, DataRepositoryService } from "../../services/data-repository.service";
-import { ModalController } from "@ionic/angular";
-import { BillEditorComponent } from "../../components/bill-editor/bill-editor.component";
-import * as dayjs from "dayjs";
+import { Component, NgZone, OnInit } from '@angular/core';
+import { Bill, DataRepositoryService } from '../../services/data-repository.service';
+import { ModalController } from '@ionic/angular';
+import { BillEditorComponent } from '../../components/bill-editor/bill-editor.component';
+import * as dayjs from 'dayjs';
 
 @Component({
   selector: 'app-bill-list',
@@ -15,6 +15,7 @@ export class BillListPage implements OnInit {
   public billList: Bill[];
 
   public constructor(private modalController: ModalController,
+                     private ngZone: NgZone,
                      private repo: DataRepositoryService) {
   }
 
@@ -43,12 +44,18 @@ export class BillListPage implements OnInit {
 
     await this.openEditor(newBill);
     await this.repo.createBill(newBill);
+    await this.refresh();
   }
 
   // endregion
 
   private async refresh(): Promise<void> {
-     this.billList = await this.repo.getAllBills();
+    const s = this.repo.getDbState().subscribe(async dbReady => {
+      if (dbReady) {
+        this.billList = await this.repo.getAllBills();
+        s.unsubscribe();
+      }
+    });
   }
 
   private async openEditor(bill: Bill): Promise<void> {

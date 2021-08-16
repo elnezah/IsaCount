@@ -4,12 +4,18 @@
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e"
+    "ionic build": "ionic build",
+    "cap sync": "npx cap sync",
+    "cap open ios": "npx cap open ios",
+    "cap open android": "npx cap open android",
+    "↔️ android livereload": "ionic cap run android -l --external",
+    "↔️ and livereload open": "ionic cap run android -l --external --open",
+    "↔️ ios livereload": "ionic cap run ios -l --external",
+    "run android": "ionic cap run android --external",
+    "run ios": "ionic cap run ios --external",
+    "cap copy": "npx cap copy",
+    "ionic build prod": "ionic build --prod",
+    "jetify cordova plugins": "npx jetifier"
   },
   "private": true,
   "dependencies": {
@@ -20,6 +26,7 @@
     "@angular/platform-browser": "~12.1.1",
     "@angular/platform-browser-dynamic": "~12.1.1",
     "@angular/router": "~12.1.1",
+    "@capacitor/android": "3.1.2",
     "@capacitor/app": "1.0.2",
     "@capacitor/camera": "^1.0.3",
     "@capacitor/core": "^3.1.2",

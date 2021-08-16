@@ -1,0 +1,6 @@
+{
+	"appId": "eu.elnezah.isacount",
+	"appName": "IsaCount",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}
