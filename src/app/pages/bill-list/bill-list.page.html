@@ -6,8 +6,16 @@
 
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let bill of billList">
-      <ion-title>{{bill.name}}</ion-title>
+    <ion-item *ngFor="let bill of billList"
+              [routerLink]="'/counter-list/' +  bill.id">
+      <div>
+      <h3>{{bill.name}}</h3>
+      <div>
+        {{bill.description}}
+        <br>
+        {{bill.dateTime.toISOString() | date: 'd.MM.yyyy'}}
+      </div>
+      </div>
     </ion-item>
   </ion-list>
 

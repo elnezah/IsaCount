@@ -56,7 +56,7 @@ export class DataRepositoryService {
   public constructor(private db: DatabaseService) {
   }
 
-  // region Static methos for object conversion
+  // region Static methods for object conversion
   /**
    * Transforms an instance of any into another instance of any, being sure that this second contains every field
    * mentioned in the fieldList parameter
@@ -161,7 +161,7 @@ export class DataRepositoryService {
       console.debug(DataRepositoryService.TAG, `No ${elementName} found in DB.`);
       return null;
     } catch (e) {
-      console.error(DataRepositoryService.TAG, `Error trying to get all ${elementName}s.`, e);
+      console.trace(DataRepositoryService.TAG, `Error trying to get all ${elementName}s.`, e);
       return null;
     } finally {
       const endTime = dayjs();
@@ -264,12 +264,12 @@ export class DataRepositoryService {
   // endregion
 
   // region Counter
-  public async getCountersForBill(bill: Bill): Promise<Counter[]> {
+  public async getCountersForBillId(billId: number): Promise<Counter[]> {
     const elementName = 'Counter';
     const startTime = dayjs();
 
     try {
-      const r = await this.db.getAllCountersForBillId(bill.id);
+      const r = await this.db.getAllCountersForBillId(billId);
       if (r && r.rows.length > 0) {
         const res: Counter[] = [];
 

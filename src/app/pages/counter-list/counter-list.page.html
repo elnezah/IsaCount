@@ -1,9 +1,25 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>counter-list</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title>{{bill?.name}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-list *ngIf="counters">
+    <ion-item>
+      <app-counter-list-element *ngFor="let counter of counters"
+                                [counter]="counter">
+      </app-counter-list-element>
+    </ion-item>
+  </ion-list>
 
+  <ion-fab horizontal="end" vertical="bottom">
+    <ion-fab-button (click)="onClickOnAddCounter()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

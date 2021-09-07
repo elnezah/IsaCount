@@ -42,8 +42,11 @@ export class BillListPage implements OnInit {
       dateTime: dayjs()
     };
 
-    await this.openEditor(newBill);
-    await this.repo.createBill(newBill);
+    const r = await this.openEditor(newBill);
+    console.log(BillListPage.TAG, 'onClickOnAddBill', {r});
+    if (r?.role === 'save') {
+      await this.repo.createBill(newBill);
+    }
     await this.refresh();
   }
 
@@ -51,21 +54,22 @@ export class BillListPage implements OnInit {
 
   private async refresh(): Promise<void> {
     const s = this.repo.getDbState().subscribe(async dbReady => {
+      console.log(BillListPage.TAG, 'refresh', {dbReady});
       if (dbReady) {
         this.billList = await this.repo.getAllBills();
+        console.log(BillListPage.TAG, 'refresh', {billList: this.billList});
         s.unsubscribe();
       }
     });
   }
 
-  private async openEditor(bill: Bill): Promise<void> {
+  private async openEditor(bill: Bill): Promise<any> {
     const modal = await this.modalController.create({
       component: BillEditorComponent,
       componentProps: {bill}
     });
     await modal.present();
 
-    const r = await modal.onDidDismiss();
-    console.log(BillListPage.TAG, 'openEditor', {r});
+    return await modal.onDidDismiss();
   }
 }

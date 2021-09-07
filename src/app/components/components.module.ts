@@ -6,6 +6,7 @@ import { BillListElementComponent } from './bill-list-element/bill-list-element.
 import { CounterEditorComponent } from './counter-editor/counter-editor.component';
 import { CounterListElementComponent } from './counter-list-element/counter-list-element.component';
 import { FormsModule } from "@angular/forms";
+import { AmountChangerComponent } from "./amount-changer/amount-changer.component";
 
 @NgModule(
     {
@@ -15,10 +16,11 @@ import { FormsModule } from "@angular/forms";
         FormsModule,
       ],
         declarations: [
-          BillEditorComponent,
-          BillListElementComponent,
-          CounterEditorComponent,
-          CounterListElementComponent
+            BillEditorComponent,
+            BillListElementComponent,
+            CounterEditorComponent,
+            CounterListElementComponent,
+            AmountChangerComponent
         ],
         exports: [
           BillEditorComponent,

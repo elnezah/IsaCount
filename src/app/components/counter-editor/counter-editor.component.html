@@ -1,3 +1,20 @@
-<p>
-  counter-editor works!
-</p>
+<div class="editor-modal-container">
+  <ion-list class="editor-modal-fields">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input [value]="counter.name"
+                 (ionChange)="counter.name = $event.target.value"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Description</ion-label>
+      <ion-textarea [value]="counter.description"
+                    (ionChange)="counter.description = $event.target.value"></ion-textarea>
+    </ion-item>
+  </ion-list>
+
+  <div class="editor-modal-buttons">
+    <ion-button (click)="onClickOnCancel()">Cancel</ion-button>
+    <ion-button (click)="onClickOnSave()">Save</ion-button>
+  </div>
+</div>

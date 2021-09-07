@@ -32,7 +32,7 @@ export class DatabaseService {
   public async getAllBills(): Promise<any> {
     const query = 'SELECT * FROM bill';
 
-    return this.db.executeSql(query);
+    return await this.db.executeSql(query, []);
   }
 
   public async getBillForId(id: number): Promise<any> {
@@ -92,9 +92,11 @@ export class DatabaseService {
   public async insertCounter(bill: number, name: string, count: number, description: string,
                              imageUri: string, price: number, meta: string): Promise<any> {
     const query = 'INSERT INTO counter ' +
-      '(bill, name, count, description, imageUri, price, meta) ' +
-      'VALUES (?, ?, ?, ?, ?, ?, ?)';
-    const values = [bill, name, count, description, imageUri, price, meta];
+      '(bill, name, count, description, imageUri, price, meta, createdAt, lastUpdate) ' +
+      'VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)';
+    const createdAt = dayjs().format();
+    const lastUpdate = dayjs().format();
+    const values = [bill, name, count, description, imageUri, price, meta, createdAt, lastUpdate];
 
     return this.db.executeSql(query, values);
   }
@@ -127,11 +129,13 @@ export class DatabaseService {
 
   private async initDatabase(): Promise<void> {
     const sqlScript = await this.http.get('assets/init.sql', {responseType: 'text'}).toPromise();
-    const queries = sqlScript.split(';').map(q => q.trim());
-    for(const query of queries) {
-      console.log(DatabaseService.TAG, 'initDatabase before', {query});
-      await this.db.executeSql(query, []);
-      console.log(DatabaseService.TAG, 'initDatabase executeSql', query);
+    const queries = sqlScript.split(';').map(q => q.trim()).filter(q => q);
+    for (const query of queries) {
+      try {
+        await this.db.executeSql(query, []);
+      } catch (e) {
+        console.error(DatabaseService.TAG, 'error in initDatabase', e);
+      }
     }
     this.dbReady.next(true);
   }

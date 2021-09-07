@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Counter } from '../../services/data-repository.service';
 
 @Component({
   selector: 'app-counter-list-element',
@@ -6,9 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./counter-list-element.component.scss'],
 })
 export class CounterListElementComponent implements OnInit {
+  private static readonly TAG = 'CounterListElementComponent';
 
-  constructor() { }
+  @Input() counter: Counter;
 
-  ngOnInit() {}
+  public constructor() {
+  }
+
+  public ngOnInit(): void {
+  }
 
 }

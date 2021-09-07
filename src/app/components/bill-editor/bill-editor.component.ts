@@ -10,7 +10,7 @@ import { ModalController } from '@ionic/angular';
 export class BillEditorComponent implements OnInit {
   private static readonly TAG = 'BillEditorComponent';
 
-  @Input('bill') bill: Bill;
+  @Input() bill: Bill;
 
   public constructor(private modalController: ModalController) {
   }
@@ -24,6 +24,6 @@ export class BillEditorComponent implements OnInit {
   }
 
   public async onClickOnSave(): Promise<void> {
-    await this.modalController.dismiss(this.bill, 'save');
+    await this.modalController.dismiss({bill: this.bill}, 'save');
   }
 }

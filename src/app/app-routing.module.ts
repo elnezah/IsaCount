@@ -9,22 +9,32 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
     path: 'bill-list',
-    loadChildren: () => import('./pages/bill-list/bill-list.module').then( m => m.BillListPageModule)
+    loadChildren: () => import('./pages/bill-list/bill-list.module').then(m => m.BillListPageModule)
   },
   {
     path: 'counter-list',
-    loadChildren: () => import('./pages/counter-list/counter-list.module').then( m => m.CounterListPageModule)
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./pages/counter-list/counter-list.module').then(m => m.CounterListPageModule)
+      },
+      {
+        path: ':billId',
+        loadChildren: () => import('./pages/counter-list/counter-list.module').then(m => m.CounterListPageModule)
+      }
+    ]
   },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
