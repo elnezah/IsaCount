@@ -23,7 +23,7 @@ export class CounterEditorComponent implements OnInit {
     await this.modalController.dismiss(null, 'cancel');
   }
 
-  public async onClickOnSave() : Promise<void>{
+  public async onClickOnSave(): Promise<void> {
     await this.modalController.dismiss({counter: this.counter}, 'save');
   }
 }

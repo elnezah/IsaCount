@@ -5,18 +5,23 @@
 </ion-header>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let bill of billList"
-              [routerLink]="'/counter-list/' +  bill.id">
-      <div>
-      <h3>{{bill.name}}</h3>
-      <div>
-        {{bill.description}}
-        <br>
-        {{bill.dateTime.toISOString() | date: 'd.MM.yyyy'}}
-      </div>
-      </div>
-    </ion-item>
+  <ion-list *ngIf="billList && billList.length > 0">
+    <ion-item-sliding *ngFor="let bill of billList">
+      <ion-item [routerLink]="'/counter-list/' +  bill.id">
+        <app-bill-list-element [bill]="bill"></app-bill-list-element>
+      </ion-item>
+
+
+      <ion-item-options side="end">
+        <ion-item-option (click)="onClickOnDeleteBill(bill)"
+                         color="danger">
+          Delete
+        </ion-item-option>
+        <ion-item-option (click)="onClickOnEditBill(bill)">
+          Edit
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 
   <ion-fab vertical="bottom" horizontal="end">

@@ -1,3 +1,10 @@
-<p>
-  bill-list-element works!
-</p>
+<div>
+  <h3>{{bill.name}}</h3>
+  <div>
+    {{bill.description}}
+    <br>
+    Total: {{total}} {{bill.currency}}
+    <br>
+    {{bill.dateTime.toISOString() | date: 'd.MM.yyyy'}}
+  </div>
+</div>

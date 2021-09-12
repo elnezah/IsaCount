@@ -3,13 +3,13 @@
     <ion-item>
       <ion-label position="floating">Name</ion-label>
       <ion-input [value]="bill.name"
-                 (ionChange)="bill.name = $event.target.value"></ion-input>
+                 (ionChange)="bill.name = $any($event.target).value"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Description</ion-label>
       <ion-textarea [value]="bill.description"
-                    (ionChange)="bill.description = $event.target.value"></ion-textarea>
+                    (ionChange)="bill.description = $any($event.target).value"></ion-textarea>
     </ion-item>
   </ion-list>
 

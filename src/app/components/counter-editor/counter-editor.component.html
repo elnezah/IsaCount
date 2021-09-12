@@ -3,13 +3,20 @@
     <ion-item>
       <ion-label position="floating">Name</ion-label>
       <ion-input [value]="counter.name"
-                 (ionChange)="counter.name = $event.target.value"></ion-input>
+                 (ionChange)="counter.name = $any($event.target).value"></ion-input>
     </ion-item>
 
     <ion-item>
       <ion-label position="floating">Description</ion-label>
       <ion-textarea [value]="counter.description"
-                    (ionChange)="counter.description = $event.target.value"></ion-textarea>
+                    (ionChange)="counter.description = $any($event.target).value"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Unit price</ion-label>
+      <ion-input [value]="counter.price"
+                 inputmode="decimal" type="decimal"
+                 (ionChange)="counter.price = $any($event.target).value"></ion-input>
     </ion-item>
   </ion-list>
 

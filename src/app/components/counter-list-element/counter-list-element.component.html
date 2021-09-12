@@ -1,4 +1,20 @@
-<p>
-  {{counter |  json}}
-  <app-amount-changer [(value)]="counter.count"></app-amount-changer>
-</p>
+<div class="counter-list-element-container">
+  <div class="counter-list-element-details"
+       (click)="onClickOnDetails()">
+    <div style="font-size: large">
+      {{counter.name}}
+    </div>
+    <div>
+      {{counter.description}}
+    </div>
+    <div class="counter-list-element-small-details-line">
+      Price ({{bill?.currency}}): {{counter.price}}
+    </div>
+
+    <div class="counter-list-element-small-details-line">
+      Created at: {{counter.createdAt.toISOString() | date: 'dd.MM.yy hh:mm'}}
+    </div>
+  </div>
+  <app-amount-changer [value]="counter.count"
+                      (valueChange)="onCounterValueChange($event)"></app-amount-changer>
+</div>

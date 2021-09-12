@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Bill, Counter, DataRepositoryService } from '../../services/data-repository.service';
-import { ModalController } from '@ionic/angular';
+import { AlertController, ModalController } from '@ionic/angular';
 import * as dayjs from 'dayjs';
 import { CounterEditorComponent } from '../../components/counter-editor/counter-editor.component';
 
@@ -15,8 +15,12 @@ export class CounterListPage implements OnInit {
 
   public bill: Bill;
   public counters: Counter[];
+  public get total(): number {
+    return this.counters?.reduce<number>((a, e) => a + e.count * e.price, 0);
+  }
 
-  constructor(private repo: DataRepositoryService,
+  constructor(private alertController: AlertController,
+              private repo: DataRepositoryService,
               private route: ActivatedRoute,
               private modalController: ModalController) {
   }
@@ -29,7 +33,6 @@ export class CounterListPage implements OnInit {
         if (s) {
           this.bill = await this.repo.getBillForId(billId);
           this.counters = await this.repo.getCountersForBillId(billId);
-          console.log(CounterListPage.TAG, {counters: this.counters, bill: this.bill});
           mSub.unsubscribe();
         }
       });
@@ -38,6 +41,7 @@ export class CounterListPage implements OnInit {
     }
   }
 
+  // region Listeners
   public async onClickOnAddCounter(): Promise<void> {
     const newCounter: Counter = {
       id: -1,
@@ -59,6 +63,48 @@ export class CounterListPage implements OnInit {
 
     await this.refresh();
   }
+
+  public async onClickOnCounterDetails(counter: Counter): Promise<void> {
+    const r = await this.openEditor(counter);
+
+    if (r?.role === 'save') {
+      await this.repo.updateCounter(counter);
+    }
+
+    await this.refresh();
+  }
+
+  public async onClickOnDeleteCounter(counter: Counter): Promise<void> {
+    const alert = await this.alertController.create({
+      header: 'Warning',
+      message: 'Deleting a counter cannot be undone. Do you still want to delete it?',
+      buttons: [
+        {
+          text: 'Yes, delete',
+          role: 'delete'
+        },
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        }
+      ]
+    });
+    await alert.present();
+
+    const r = await alert.onDidDismiss();
+
+    if (r.role === 'delete') {
+      await this.repo.deleteCounter(counter);
+      await this.refresh();
+    }
+  }
+
+  public async onCounterCountChange(counter: Counter, newValue: number): Promise<void> {
+    counter.count = newValue;
+    await this.repo.updateCounter(counter);
+  }
+
+  // endregion
 
   private async refresh(): Promise<void> {
     this.counters = await this.repo.getCountersForBillId(this.bill.id);

@@ -3,8 +3,22 @@
   flex-direction: row;
   align-content: center;
   justify-content: center;
+  gap: 1em;
 }
 
 .value-changer-value {
+  display: flex;
+  align-items: center;
   font-size: x-large;
+}
+
+ion-button {
+  --button-padding: 0;
+  --padding-start: var(--button-padding);
+  --padding-end: var(--button-padding);
+  --padding-top: var(--button-padding);
+  --padding-bottom: var(--button-padding);
+  height: 2em;
+  width: 2em;
+
 }
