@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CounterListPageRoutingModule } from './counter-list-routing.module';
 
 import { CounterListPage } from './counter-list.page';
-import { ComponentsModule } from "../../components/components.module";
+import { ComponentsModule } from '../../components/components.module';
 
 @NgModule({
     imports: [
@@ -17,6 +17,9 @@ import { ComponentsModule } from "../../components/components.module";
         CounterListPageRoutingModule,
         ComponentsModule
     ],
-  declarations: [CounterListPage]
+    exports: [
+        CounterListPage
+    ],
+    declarations: [CounterListPage]
 })
 export class CounterListPageModule {}
